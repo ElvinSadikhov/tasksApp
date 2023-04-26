@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tasks_app/blocs/bloc_exports.dart';
+import 'package:flutter_tasks_app/ui/widgets/main_drawer.dart';
 import 'package:flutter_tasks_app/ui/widgets/add_task_panel.dart';
 import 'package:flutter_tasks_app/ui/widgets/tasks_list.dart';
 
 import '../../models/task.dart';
 
 class TasksScreen extends StatefulWidget {
+  static const String route = "/tasks";
+
   const TasksScreen({Key? key}) : super(key: key);
 
   @override
@@ -29,13 +32,14 @@ class _TasksScreenState extends State<TasksScreen> {
               )
             ],
           ),
+          drawer: const MainDrawer(),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Center(
+              Center(
                 child: Chip(
                   label: Text(
-                    'Tasks:',
+                    "${tasks.length} ${tasks.length == 1 ? "Task" : "Tasks"}",
                   ),
                 ),
               ),

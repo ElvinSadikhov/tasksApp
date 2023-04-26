@@ -5,29 +5,29 @@ class Task extends Equatable {
   final String id;
   final String title;
   bool? isDone;
-  bool? isDeleted;
+  bool? isRemoved;
 
   Task({
     required this.id,
     required this.title,
     this.isDone,
-    this.isDeleted,
+    this.isRemoved,
   }) {
     isDone = isDone ?? false;
-    isDeleted = isDeleted ?? false;
+    isRemoved = isRemoved ?? false;
   }
 
   Task copyWith({
     String? id,
     String? title,
     bool? isDone,
-    bool? isDeleted,
+    bool? isRemoved,
   }) {
     return Task(
       id: id ?? this.id,
       title: title ?? this.title,
       isDone: isDone ?? this.isDone,
-      isDeleted: isDeleted ?? this.isDeleted,
+      isRemoved: isRemoved ?? this.isRemoved,
     );
   }
 
@@ -36,7 +36,7 @@ class Task extends Equatable {
       'id': id,
       'title': title,
       'isDone': isDone,
-      'isDeleted': isDeleted,
+      'isRemoved': isRemoved,
     };
   }
 
@@ -45,10 +45,10 @@ class Task extends Equatable {
       id: map['id'] as String,
       title: map['title'] as String,
       isDone: map['isDone'] != null ? map['isDone'] as bool : null,
-      isDeleted: map['isDeleted'] != null ? map['isDeleted'] as bool : null,
+      isRemoved: map['isRemoved'] != null ? map['isRemoved'] as bool : null,
     );
   }
 
   @override
-  List<Object?> get props => [id, title, isDone, isDeleted];
+  List<Object?> get props => [id, title, isDone, isRemoved];
 }
