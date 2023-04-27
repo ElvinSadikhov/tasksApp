@@ -3,14 +3,9 @@ import 'package:flutter_tasks_app/blocs/bloc_exports.dart';
 import 'package:flutter_tasks_app/ui/screens/recycle_bin_screen.dart';
 import 'package:flutter_tasks_app/ui/screens/tasks_screen.dart';
 
-class MainDrawer extends StatefulWidget {
+class MainDrawer extends StatelessWidget {
   const MainDrawer({Key? key}) : super(key: key);
 
-  @override
-  State<MainDrawer> createState() => _MainDrawerState();
-}
-
-class _MainDrawerState extends State<MainDrawer> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -20,7 +15,7 @@ class _MainDrawerState extends State<MainDrawer> {
             Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-              color: Colors.red,
+              color: Colors.grey,
               child: Text("Task Drawer",
                   style: Theme.of(context).textTheme.headline5),
             ),
@@ -29,7 +24,7 @@ class _MainDrawerState extends State<MainDrawer> {
                 return Column(
                   children: [
                     GestureDetector(
-                      onTap: _onMyTasksTileTap,
+                      onTap: () => _onMyTasksTileTap(context),
                       child: ListTile(
                           leading: const Icon(Icons.folder_special),
                           title: const Text("My Tasks"),
@@ -37,7 +32,7 @@ class _MainDrawerState extends State<MainDrawer> {
                     ),
                     const Divider(),
                     GestureDetector(
-                      onTap: _onRecycleBinTileTap,
+                      onTap: () => _onRecycleBinTileTap(context),
                       child: ListTile(
                           leading: const Icon(Icons.delete),
                           title: const Text("Bin"),
@@ -47,13 +42,25 @@ class _MainDrawerState extends State<MainDrawer> {
                 );
               },
             ),
+            BlocBuilder<ThemeBloc, ThemeState>(
+              builder: (context, state) {
+                return Switch(
+                    value: state is DarkThemeState,
+                    onChanged: (value) {
+                      context
+                          .read<ThemeBloc>()
+                          .add(value ? SwitchOnEvent() : SwitchOffEvent());
+                    });
+              },
+            )
           ],
         ),
       ),
     );
   }
 
-  void _onMyTasksTileTap() => Navigator.pushNamed(context, TasksScreen.route);
-  void _onRecycleBinTileTap() =>
-      Navigator.pushNamed(context, RecycleBinScreen.route);
+  void _onMyTasksTileTap(BuildContext context) =>
+      Navigator.pushReplacementNamed(context, TasksScreen.route);
+  void _onRecycleBinTileTap(BuildContext context) =>
+      Navigator.pushReplacementNamed(context, RecycleBinScreen.route);
 }

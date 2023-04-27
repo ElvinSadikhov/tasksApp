@@ -1,36 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tasks_app/blocs/bloc_exports.dart';
-import 'package:flutter_tasks_app/blocs/tasks_bloc_observer.dart';
+import 'package:flutter_tasks_app/config/main_configuration.dart';
+import 'package:flutter_tasks_app/consts/app_themes.dart';
 import 'package:flutter_tasks_app/utils/app_router.dart';
-import 'package:path_provider/path_provider.dart';
 
 import 'ui/screens/tasks_screen.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  HydratedBloc.storage = await HydratedStorage.build(
-      storageDirectory: await getApplicationDocumentsDirectory());
-  Bloc.observer = TasksBlocObserver();
-  runApp(MyApp());
+  await MainConfiguration.configure();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final TasksBloc _tasksBloc = TasksBloc();
+  const MyApp({Key? key}) : super(key: key);
 
-  MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: _tasksBloc,
-      child: MaterialApp(
-        title: 'Flutter Tasks App',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: const TasksScreen(),
-        onGenerateRoute: AppRouter.onGenerateRoute,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => TasksBloc()),
+        BlocProvider(create: (context) => ThemeBloc()),
+      ],
+      child: BlocBuilder<ThemeBloc, ThemeState>(
+        builder: (context, state) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: state is DarkThemeState
+                ? AppThemes.darkhemeData
+                : AppThemes.lightThemeData,
+            home: const TasksScreen(),
+            onGenerateRoute: AppRouter.onGenerateRoute,
+          );
+        },
       ),
     );
   }
