@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tasks_app/blocs/bloc_exports.dart';
 import 'package:flutter_tasks_app/ui/screens/recycle_bin_screen.dart';
-import 'package:flutter_tasks_app/ui/screens/tasks_screen.dart';
+import 'package:flutter_tasks_app/ui/screens/home_screen.dart';
+import 'package:flutter_tasks_app/ui/screens/pending_tasks_screen.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({Key? key}) : super(key: key);
@@ -28,7 +29,7 @@ class MainDrawer extends StatelessWidget {
                       child: ListTile(
                           leading: const Icon(Icons.folder_special),
                           title: const Text("My Tasks"),
-                          trailing: Text(state.allTasks.length.toString())),
+                          trailing: Text(state.pendingTasks.length.toString())),
                     ),
                     const Divider(),
                     GestureDetector(
@@ -60,7 +61,7 @@ class MainDrawer extends StatelessWidget {
   }
 
   void _onMyTasksTileTap(BuildContext context) =>
-      Navigator.pushReplacementNamed(context, TasksScreen.route);
+      Navigator.pushReplacementNamed(context, HomeScreen.route);
   void _onRecycleBinTileTap(BuildContext context) =>
       Navigator.pushReplacementNamed(context, RecycleBinScreen.route);
 }

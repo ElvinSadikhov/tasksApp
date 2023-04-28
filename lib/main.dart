@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tasks_app/blocs/bloc_exports.dart';
 import 'package:flutter_tasks_app/config/main_configuration.dart';
 import 'package:flutter_tasks_app/consts/app_themes.dart';
+import 'package:flutter_tasks_app/ui/screens/home_screen.dart';
 import 'package:flutter_tasks_app/utils/app_router.dart';
 
-import 'ui/screens/tasks_screen.dart';
+import 'ui/screens/pending_tasks_screen.dart';
 
 void main() async {
   await MainConfiguration.configure();
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
             theme: state is DarkThemeState
                 ? AppThemes.darkhemeData
                 : AppThemes.lightThemeData,
-            home: const TasksScreen(),
+            home: const HomeScreen(),
             onGenerateRoute: AppRouter.onGenerateRoute,
           );
         },
