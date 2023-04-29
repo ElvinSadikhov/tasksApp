@@ -12,6 +12,7 @@ class AddTaskPanel extends StatefulWidget {
 
 class _AddTaskPanelState extends State<AddTaskPanel> {
   final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +26,24 @@ class _AddTaskPanelState extends State<AddTaskPanel> {
             children: [
               const Text("Add Task", style: TextStyle(fontSize: 24)),
               const SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.only(top: 10, bottom: 10),
+                child: TextField(
+                  controller: _titleController,
+                  autofocus: true,
+                  decoration: const InputDecoration(
+                    label: Text("Title"),
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ),
               TextField(
-                controller: _titleController,
+                controller: _descriptionController,
                 autofocus: true,
+                minLines: 3,
+                maxLines: 5,
                 decoration: const InputDecoration(
-                  label: Text("Title"),
+                  label: Text("Description"),
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -56,8 +70,10 @@ class _AddTaskPanelState extends State<AddTaskPanel> {
   }
 
   void _onAddBtnTap(BuildContext context) {
-    final task =
-        Task(id: GUIDGen.generate(), title: _titleController.text.trim());
+    final task = Task(
+        id: GUIDGen.generate(),
+        title: _titleController.text.trim(),
+        description: _descriptionController.text.trim());
     context.read<TasksBloc>().add(AddTask(task: task));
     Navigator.pop(context);
   }

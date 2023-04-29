@@ -4,12 +4,14 @@ import 'package:equatable/equatable.dart';
 class Task extends Equatable {
   final String id;
   final String title;
+  final String description;
   bool? isDone;
   bool? isRemoved;
 
   Task({
     required this.id,
     required this.title,
+    required this.description,
     this.isDone,
     this.isRemoved,
   }) {
@@ -20,12 +22,14 @@ class Task extends Equatable {
   Task copyWith({
     String? id,
     String? title,
+    String? description,
     bool? isDone,
     bool? isRemoved,
   }) {
     return Task(
       id: id ?? this.id,
       title: title ?? this.title,
+      description: title ?? this.description,
       isDone: isDone ?? this.isDone,
       isRemoved: isRemoved ?? this.isRemoved,
     );
@@ -35,6 +39,7 @@ class Task extends Equatable {
     return <String, dynamic>{
       'id': id,
       'title': title,
+      'description': description,
       'isDone': isDone,
       'isRemoved': isRemoved,
     };
@@ -44,11 +49,12 @@ class Task extends Equatable {
     return Task(
       id: map['id'] as String,
       title: map['title'] as String,
+      description: map['description'] as String,
       isDone: map['isDone'] != null ? map['isDone'] as bool : null,
       isRemoved: map['isRemoved'] != null ? map['isRemoved'] as bool : null,
     );
   }
 
   @override
-  List<Object?> get props => [id, title, isDone, isRemoved];
+  List<Object?> get props => [id, title, description, isDone, isRemoved];
 }

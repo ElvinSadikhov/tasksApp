@@ -15,6 +15,7 @@ class TastTile extends StatelessWidget {
     return ListTile(
       title: Text(
         task.title,
+        overflow: TextOverflow.ellipsis,
         style: TextStyle(
             decoration: task.isDone! ? TextDecoration.lineThrough : null),
       ),
