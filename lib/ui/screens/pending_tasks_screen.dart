@@ -38,11 +38,4 @@ class _PendingTasksScreenState extends State<PendingTasksScreen> {
       },
     );
   }
-
-  void _addTask(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      builder: (context) => const AddTaskPanel(),
-    );
-  }
 }

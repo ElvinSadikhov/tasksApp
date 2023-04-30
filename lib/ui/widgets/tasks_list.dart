@@ -23,7 +23,7 @@ class TasksList extends StatelessWidget {
                     title: SelectableText.rich(
                       TextSpan(children: [
                         const TextSpan(
-                            text: "Text\n",
+                            text: "Title\n",
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         TextSpan(text: task.title),
                         const TextSpan(

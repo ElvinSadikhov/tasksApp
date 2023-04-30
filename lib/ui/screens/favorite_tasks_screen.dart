@@ -38,11 +38,4 @@ class _FavoriteTasksScreenState extends State<FavoriteTasksScreen> {
       },
     );
   }
-
-  void _addTask(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      builder: (context) => const AddTaskPanel(),
-    );
-  }
 }

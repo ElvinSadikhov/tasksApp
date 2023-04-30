@@ -38,11 +38,4 @@ class _CompletedTasksScreenState extends State<CompletedTasksScreen> {
       },
     );
   }
-
-  void _addTask(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      builder: (context) => const AddTaskPanel(),
-    );
-  }
 }

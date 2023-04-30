@@ -3,16 +3,25 @@ import 'package:flutter_tasks_app/blocs/bloc_exports.dart';
 import 'package:flutter_tasks_app/models/task.dart';
 import 'package:flutter_tasks_app/services/guid_gen.dart';
 
-class AddTaskPanel extends StatefulWidget {
-  const AddTaskPanel({Key? key}) : super(key: key);
+class EditTaskPanel extends StatefulWidget {
+  final Task oldTask;
+  const EditTaskPanel({Key? key, required this.oldTask}) : super(key: key);
 
   @override
-  State<AddTaskPanel> createState() => _AddTaskPanelState();
+  State<EditTaskPanel> createState() => _EditTaskPanelState();
 }
 
-class _AddTaskPanelState extends State<AddTaskPanel> {
-  final TextEditingController _titleController = TextEditingController();
-  final TextEditingController _descriptionController = TextEditingController();
+class _EditTaskPanelState extends State<EditTaskPanel> {
+  late final TextEditingController _titleController;
+  late final TextEditingController _descriptionController;
+
+  @override
+  void initState() {
+    super.initState();
+    _titleController = TextEditingController(text: widget.oldTask.title);
+    _descriptionController =
+        TextEditingController(text: widget.oldTask.description);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,12 +79,17 @@ class _AddTaskPanelState extends State<AddTaskPanel> {
   }
 
   void _onAddBtnTap(BuildContext context) {
-    final task = Task(
-        id: GUIDGen.generate(),
-        title: _titleController.text.trim(),
-        description: _descriptionController.text.trim(),
-        date: DateTime.now().toString());
-    context.read<TasksBloc>().add(AddTask(task: task));
+    final editedTask = Task(
+      id: widget.oldTask.id,
+      title: _titleController.text.trim(),
+      description: _descriptionController.text.trim(),
+      date: DateTime.now().toString(),
+      isDone: false,
+      isFavorite: widget.oldTask.isFavorite,
+    );
+    context
+        .read<TasksBloc>()
+        .add(EditTask(oldTask: widget.oldTask, newTask: editedTask));
     Navigator.pop(context);
   }
 }
