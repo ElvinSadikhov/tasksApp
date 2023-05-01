@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tasks_app/blocs/bloc_exports.dart';
-import 'package:flutter_tasks_app/ui/widgets/add_task_panel.dart';
 import 'package:flutter_tasks_app/ui/widgets/tasks_list.dart';
 import 'package:flutter_tasks_app/utils/formatter.dart';
 

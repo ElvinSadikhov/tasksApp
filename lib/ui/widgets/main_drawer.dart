@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tasks_app/blocs/bloc_exports.dart';
+import 'package:flutter_tasks_app/consts/app_strings.dart';
 import 'package:flutter_tasks_app/ui/screens/recycle_bin_screen.dart';
 import 'package:flutter_tasks_app/ui/screens/home_screen.dart';
-import 'package:flutter_tasks_app/ui/screens/pending_tasks_screen.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({Key? key}) : super(key: key);
@@ -17,7 +17,7 @@ class MainDrawer extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
               color: Colors.grey,
-              child: Text("Task Drawer",
+              child: Text(AppStrings.taskDrawer,
                   style: Theme.of(context).textTheme.headline5),
             ),
             BlocBuilder<TasksBloc, TasksState>(
@@ -28,7 +28,7 @@ class MainDrawer extends StatelessWidget {
                       onTap: () => _onMyTasksTileTap(context),
                       child: ListTile(
                           leading: const Icon(Icons.folder_special),
-                          title: const Text("My Tasks"),
+                          title: const Text(AppStrings.myTasks),
                           trailing: Text(state.pendingTasks.length.toString())),
                     ),
                     const Divider(),
@@ -36,7 +36,7 @@ class MainDrawer extends StatelessWidget {
                       onTap: () => _onRecycleBinTileTap(context),
                       child: ListTile(
                           leading: const Icon(Icons.delete),
-                          title: const Text("Bin"),
+                          title: const Text(AppStrings.bin),
                           trailing: Text(state.removedTasks.length.toString())),
                     ),
                   ],

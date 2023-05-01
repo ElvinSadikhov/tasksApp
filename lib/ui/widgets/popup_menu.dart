@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tasks_app/consts/app_strings.dart';
 import 'package:flutter_tasks_app/models/task.dart';
 
 class PopupMenu extends StatelessWidget {
@@ -30,14 +31,14 @@ class PopupMenu extends StatelessWidget {
           child: TextButton.icon(
               onPressed: null,
               icon: const Icon(Icons.delete_forever),
-              label: const Text("Delete Forever")),
+              label: const Text(AppStrings.deleteForever)),
           onTap: () => onDeleteTap?.call(context),
         ),
         PopupMenuItem(
           child: TextButton.icon(
               onPressed: null,
               icon: const Icon(Icons.restore),
-              label: const Text("Restore")),
+              label: const Text(AppStrings.restore)),
           onTap: () => onRestoreTap?.call(context),
         )
       ];
@@ -48,7 +49,7 @@ class PopupMenu extends StatelessWidget {
           child: TextButton.icon(
               onPressed: null,
               icon: const Icon(Icons.edit),
-              label: const Text("Edit")),
+              label: const Text(AppStrings.edit)),
           onTap: () => onEditTap?.call(context),
         ),
         PopupMenuItem(
@@ -58,14 +59,15 @@ class PopupMenu extends StatelessWidget {
                     ? Icons.bookmark_remove
                     : Icons.bookmark_add_outlined),
                 label: Text(task.isFavorite!
-                    ? "Remove from\n Bookmarks" // todo: add to strings class
-                    : "Add to\n Bookmarks")),
+                    ? AppStrings
+                        .removeFromBookmarks // todo: add to strings class
+                    : AppStrings.addToBookmarks)),
             onTap: () => onBookmarkTap?.call(context)),
         PopupMenuItem(
           child: TextButton.icon(
               onPressed: null,
               icon: const Icon(Icons.delete),
-              label: const Text("Delete")),
+              label: const Text(AppStrings.delete)),
           onTap: () => onDeleteTap?.call(context),
         )
       ];

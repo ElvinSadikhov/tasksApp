@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tasks_app/blocs/bloc_exports.dart';
+import 'package:flutter_tasks_app/consts/app_strings.dart';
 import 'package:flutter_tasks_app/ui/widgets/main_drawer.dart';
 import 'package:flutter_tasks_app/ui/widgets/tasks_list.dart';
 
@@ -12,7 +13,7 @@ class RecycleBinScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Recycle Bin"),
+        title: const Text(AppStrings.recycleBin),
         actions: [
           PopupMenuButton(
             itemBuilder: (context) => [
@@ -20,7 +21,7 @@ class RecycleBinScreen extends StatelessWidget {
                 child: TextButton.icon(
                     onPressed: null,
                     icon: const Icon(Icons.delete_forever),
-                    label: const Text("Delete all tasks")),
+                    label: const Text(AppStrings.deleteAllTasks)),
                 onTap: () =>
                     context.read<TasksBloc>().add(DeleteAllRemovedTask()),
               )
@@ -48,7 +49,7 @@ class RecycleBinScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => {},
-        tooltip: 'Add Task',
+        tooltip: AppStrings.addTask,
         child: const Icon(Icons.add),
       ),
     );

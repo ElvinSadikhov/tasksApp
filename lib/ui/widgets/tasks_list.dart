@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tasks_app/models/task.dart';
 import 'package:flutter_tasks_app/ui/widgets/task_tile.dart';
 
+import '../../consts/app_strings.dart';
+
 class TasksList extends StatelessWidget {
   const TasksList({
     Key? key,
@@ -23,11 +25,11 @@ class TasksList extends StatelessWidget {
                     title: SelectableText.rich(
                       TextSpan(children: [
                         const TextSpan(
-                            text: "Title\n",
+                            text: "${AppStrings.title}\n",
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         TextSpan(text: task.title),
                         const TextSpan(
-                            text: "\n\nDesctiption\n",
+                            text: "\n\n${AppStrings.desctiption}\n",
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         TextSpan(text: task.description),
                       ]),
@@ -39,13 +41,3 @@ class TasksList extends StatelessWidget {
     );
   }
 }
-
-// Expanded(
-//       child: ListView.builder(
-//         itemCount: taskList.length,
-//         itemBuilder: (context, index) {
-//           final Task task = taskList[index];
-//           return TastTile(task: task);
-//         },
-//       ),
-//     );

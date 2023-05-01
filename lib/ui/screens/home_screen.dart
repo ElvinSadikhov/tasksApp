@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tasks_app/consts/app_strings.dart';
 import 'package:flutter_tasks_app/models/tab_screen.dart';
 import 'package:flutter_tasks_app/ui/screens/completed_tasks_screen.dart';
 import 'package:flutter_tasks_app/ui/screens/pending_tasks_screen.dart';
@@ -48,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: const MainDrawer(),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _addTask(context),
-        tooltip: 'Add Task',
+        tooltip: AppStrings.addTask,
         child: const Icon(Icons.add),
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -60,11 +61,11 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         items: const [
           BottomNavigationBarItem(
-              icon: Icon(Icons.label), label: "Pending Tasks"),
+              icon: Icon(Icons.label), label: AppStrings.pendingTasks),
           BottomNavigationBarItem(
-              icon: Icon(Icons.done), label: "Completed Tasks"),
+              icon: Icon(Icons.done), label: AppStrings.completedTasks),
           BottomNavigationBarItem(
-              icon: Icon(Icons.favorite), label: "Favorite Tasks"),
+              icon: Icon(Icons.favorite), label: AppStrings.favoriteTasks),
         ],
       ),
       body: _pageDetails[_currentTabIndex].screen,
